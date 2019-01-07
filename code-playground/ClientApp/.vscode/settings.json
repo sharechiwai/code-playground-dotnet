@@ -1,0 +1,18 @@
+{
+    "eslint.validate":[
+        {
+            "language": "html",
+            "autoFix": true
+        },
+        {
+            "language": "react-app",
+            "autoFix": true
+        },
+        {
+            "language": "javascript",
+            "autoFix": true
+        },
+    ],
+    "eslint.autoFixOnSave": true,
+    "editor.formatOnSave": true,
+}
