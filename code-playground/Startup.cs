@@ -4,6 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using NJsonSchema;
+using NSwag.AspNetCore;
+using System.Reflection;
 
 namespace code_playground
 {
@@ -20,6 +23,8 @@ namespace code_playground
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddOpenApiDocument(document => document.DocumentName = "OpenApiV1");
+            services.AddSwaggerDocument(document => document.DocumentName = "SwaggerV1");
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -42,6 +47,10 @@ namespace code_playground
 
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
+
+            // Register the Swagger generator and the Swagger UI middlewares
+            app.UseSwagger(); // registers the two documents in separate routes
+            app.UseSwaggerUi3(); // registers a single Swagger UI (v3) with the two documents
 
             app.UseMvc(routes =>
             {
