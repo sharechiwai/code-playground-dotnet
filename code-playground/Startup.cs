@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using NJsonSchema;
 using NSwag.AspNetCore;
 using System.Reflection;
+using code_playground.Hubs;
 
 namespace code_playground
 {
@@ -31,6 +32,7 @@ namespace code_playground
             {
                 configuration.RootPath = "ClientApp/build";
             });
+            services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -57,6 +59,11 @@ namespace code_playground
                 routes.MapRoute(
                     name: "default",
                     template: "{controller}/{action=Index}/{id?}");
+            });
+
+            app.UseSignalR(routes =>
+            {
+                routes.MapHub<ChatHub>("/chatHub");
             });
 
             app.UseSpa(spa =>
