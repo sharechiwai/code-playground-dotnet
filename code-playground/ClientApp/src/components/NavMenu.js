@@ -69,7 +69,7 @@ export class NavMenu extends Component {
                 </NavItem>
                 <NavItem>
                   <NavLink tag={Link} className="text-dark" to="/history-today">
-                    Hisyoty Today
+                    History Today
                   </NavLink>
                 </NavItem>
               </ul>
