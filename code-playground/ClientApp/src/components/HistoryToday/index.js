@@ -3,32 +3,22 @@ import axios from 'axios';
 
 export class HistoryToday extends Component {
   //static displayName = "History Today";
-  static historyTodayUrl = 'https://history.muffinlabs.com/date';
+  static historyTodayUrl =
+    `${window.location.origin.toString()}` +
+    '/api/utilproxy/proxy?url=' +
+    'https://history.muffinlabs.com/date';
   constructor(props) {
     super(props);
   }
 
-  // componentDidMount() {
-  //   axios.defaults.headers.post['Content-Type'] =
-  //     'application/json;charset=utf-8';
-  //   axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
-  //   axios
-  //     .get('//history.muffinlabs.com/date')
-  //     .then(response => {
-  //       console.log(response.data);
-  //     })
-  //     .catch(error => {
-  //       console.log(error);
-  //     });
-  // }
   componentDidMount() {
-    fetch('https://history.muffinlabs.com/date', {
-      crossDomain: true,
-
-      headers: { 'Content-Type': 'application/json' },
-    })
+    var url =
+      `${window.location.origin.toString()}` +
+      '/api/utilproxy/proxy?url=' +
+      'https://history.muffinlabs.com/date';
+    fetch(url)
       .then(response => response.json())
-      .then(data => this.setState({ data }));
+      .then(data => console.log(data));
   }
 
   render() {
